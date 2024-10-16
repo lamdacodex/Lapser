@@ -5,6 +5,7 @@ import { SigninSchema, SignupSchema } from "../types";
 import { prismaClient } from "../db";
 import jwt from "jsonwebtoken";
 import { JWT_PASSWORD } from "../config";
+import bcrypt from "bcrypt";
 
 const router = Router();
 
@@ -31,10 +32,12 @@ router.post("/signup", async (req, res) => {
         })
     }
 
+    var password =  await bcrypt.hash(parsedData.data.password, 10);
+
     await prismaClient.user.create({
         data: {
             email: parsedData.data.username,
-            password: parsedData.data.password,
+            password: password,
             name: parsedData.data.name
         }
     })
