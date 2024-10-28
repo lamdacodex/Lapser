@@ -13,6 +13,11 @@ app.use("/api/v1/user", userRouter);
 
 app.use("/api/v1/zap", zapRouter);
 
+
+app.get("/test", (req:any, res :any) => {
+    res.send("route for testing the server");
+});
+
 app.use("/api/v1/trigger", triggerRouter);
 
 app.use("/api/v1/action", actionRouter);
