@@ -71,6 +71,21 @@ async function main() {
             // await sendEmail(to, body);
           }
 
+          if (currentAction.type.id === "send-sol") {
+            const amount = parse((currentAction.metadata as JsonObject)?.amount as string, zapRunMetadata);
+            const address = parse((currentAction.metadata as JsonObject)?.address as string, zapRunMetadata);
+            console.log(`Sending out SOL of ${amount} to address ${address}`);
+            // await sendSol(address, amount);
+          }
+
+          if(currentAction.type.id === "webhook") {
+            const url = parse((currentAction.metadata as JsonObject)?.url as string, zapRunMetadata);
+            const method = parse((currentAction.metadata as JsonObject)?.method as string, zapRunMetadata);
+            const body = parse((currentAction.metadata as JsonObject)?.body as string, zapRunMetadata);
+            console.log(`Sending out webhook to ${url} body is ${body}`)
+            // await sendWebhook(url, method, body);
+          }
+
           // if (currentAction.type.id === "send-sol") {
 
           //   const amount = parse((currentAction.metadata as JsonObject)?.amount as string, zapRunMetadata);
